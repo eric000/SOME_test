@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css">
+    <title>菜单</title>
+</head>
+<body>  
+    <div>
+        <h1>菜单可以修改，回车确认保存！</h1>
+    </div>
+    <ul id="menu">
+            <item
+                :model="treeData">
+            </item>
+    </ul>   
+</body>
+<script src="https://unpkg.com/vue"></script>
+
+<script type="text/x-template" id="item-template">
+    <li>
+            <div
+              
+              @click=""
+              @dblclick="">
+              <input  v-model="model.name">
+              <button type="button" class="btn btn-default btn-sm" @click="$emit('remove')">
+                <span class="glyphicon glyphicon-minus"></span> 删除
+              </button>
+              
+            </div>
+            <ul v-if="isFolder">
+              <item
+                v-for="(model,index) in model.food"
+                :model="model"
+                @remove="delChild(index)">
+              </item>
+              <li  >
+                    <input v-model="addmessage" placeholder="添加信息，回车已确定" @keyup.enter="addChild">
+              </li>
+              
+            </ul>
+    </li>
+</script>
+
+<script>
+    var menu = [
+        {"type_id":1,"name":"大菜","food":[
+                                        {"food_id":1,"name":"鱼香肉丝","price":"10"},
+                                        {"food_id":2,"name":"红烧肉","price":"11"},
+                                        {"food_id":3,"name":"香辣粉","price":"12"}
+                                        ]},
+        {"type_id":2,"name":"中菜","food":[
+                                        {"food_id":4,"name":"小炒肉","price":"13"},
+                                        {"food_id":5,"name":"云吞","price":"14"}
+                                        ]},
+        {"type_id":3,"name":"小菜","food":[
+                                        {"food_id":6,"name":"雪糕","price":"15"},
+                                        {"food_id":7,"name":"黄瓜","price":"16"}
+                                        ]}      
+    ];
+    var data ={name:"菜单",food:menu}
+
+
+
+    
+    Vue.component('item', {
+      template: '#item-template',
+      props: {
+        model: Object
+      },
+      data() {
+        return {
+          addmessage:'',
+          modeltmp:this.model
+        }
+      },
+      computed: {
+        isFolder: function () {
+          return this.model.food &&
+            this.model.food.length
+        }
+      },
+      methods: {
+        addChild() {
+          this.model.food.push({
+            name: this.addmessage
+          });
+          this.addmessage = ''
+        },
+        delChild(index){
+            this.model.food.splice(index, 1)
+        }
+      }
+    })
+
+    new Vue({
+        el: '#menu',
+        data(){
+          return{
+            treeData:data
+          }
+          
+        }
+    })
+</script>
+</html>
