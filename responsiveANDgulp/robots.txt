@@ -1,5 +1,0 @@
-# robots.txt generated at http://www.51240.com
-User-agent: *
-Disallow: 
-Crawl-delay: 120
-Disallow: /js
