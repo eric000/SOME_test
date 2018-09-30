@@ -1,5 +1,5 @@
 "use strict";
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * 默认的匹配器
  *
@@ -30,4 +30,4 @@ function checkSort(arr, comparator) {
     }
     return true;
 }
-exports["default"] = checkSort;
+exports.default = checkSort;

@@ -4,7 +4,7 @@
   "author": "weiweicat",
   "license": "MIT",
   "scripts": {
-    "test": "ava --tap | tap-nyan"
+    "test": "ava --tap | tap-nyan Array/flatten.test.js"
   },
   "dependencies": {
     "ava": "^0.25.0",

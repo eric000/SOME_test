@@ -1,5 +1,5 @@
 "use strict";
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * 根据数组返回合适的数字
  *
@@ -40,4 +40,4 @@ function slice(arr, start, end) {
     }
     return tmpArr;
 }
-exports["default"] = slice;
+exports.default = slice;
