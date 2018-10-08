@@ -97,26 +97,31 @@ When the toString method is called, the following steps are taken:
 
   ```
 
-- [JQ源码实现](https://github.com/jquery/jquery/blob/ac9e3016645078e1e42120822cfb2076151c8cbe/src/core.js)
+- [JQ源码实现](https://github.com/jquery/jquery/blob/2.2-stable/src/core.js)
 
   ```js
-  
+
   // class2type 在var文件下定义的 {}
 
-  // 来源 https://github.com/jquery/jquery/blob/ac9e3016645078e1e42120822cfb2076151c8cbe/src/core.js#L452
+  // 来源 https://github.com/jquery/jquery/blob/2.2-stable/src/core.js#L471
   // Populate the class2type map
   jQuery.each( "Boolean Number String Function Array Date RegExp Object Error Symbol".split( " " ),
   function( i, name ) {
     class2type[ "[object " + name + "]" ] = name.toLowerCase();
   } );
 
-  // 来源 https://github.com/jquery/jquery/blob/ac9e3016645078e1e42120822cfb2076151c8cbe/src/core.js#L269
-  function type( obj ) {
+  //toString 来源 https://github.com/jquery/jquery/blob/2.2-stable/src/var/toString.js
+  function toString( class2type ) {
+    return class2type.toString;
+  }
+
+  // 来源 https://github.com/jquery/jquery/blob/2.2-stable/src/core.js#L258
+   function type( obj ) {
     if ( obj == null ) {
       return obj + "";
     }
 
-    // Support: Android <=2.3 only (functionish RegExp)
+    // Support: Android<4.0, iOS<6 (functionish RegExp)
     return typeof obj === "object" || typeof obj === "function" ?
       class2type[ toString.call( obj ) ] || "object" :
       typeof obj;
