@@ -116,7 +116,7 @@ When the toString method is called, the following steps are taken:
   }
 
   // 来源 https://github.com/jquery/jquery/blob/2.2-stable/src/core.js#L258
-   function type( obj ) {
+  function type( obj ) {
     if ( obj == null ) {
       return obj + "";
     }
