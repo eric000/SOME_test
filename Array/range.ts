@@ -15,7 +15,7 @@ function newArr(start: number = 0, end?: number): number[] {
   const len = end - start;
   const tmpArr = [len];
   if (!len) {
-    throw new Error("数组长队必须大于0");
+    throw new Error("数组长度必须大于0");
   }
   for (let i = 0, cStart = start; i < len; ++i, ++cStart) {
     tmpArr[i] = cStart;
