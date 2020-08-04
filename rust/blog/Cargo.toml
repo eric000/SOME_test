@@ -1,0 +1,7 @@
+[package]
+name = "blog"
+version = "0.1.0"
+authors = ["weiweicat <894639091@qq.com>"]
+edition = "2018"
+
+[dependencies]
