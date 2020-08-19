@@ -18,7 +18,6 @@ class PluginTest {
       }
       callback()
     })
-    
   }
 }
 
