@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <div>
+            <input type="text" v-model="name" />
+            <input type="text" v-model="age" />
+        </div>
+        <div>
+            <p>姓名：<span>{{name}}</span></p>
+            <p>年龄：<span>{{age}}</span></p>
+        </div>
+        <button id="change-name">改变姓名</button>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        const app = new Vue('#app', {
+            name: '',
+            age: ''
+        })
+        document.querySelector('#change-name').addEventListener('click', (e) => {
+            app.setData('name', 'btn-set')
+        })
+    </script>
+</body>
+</html>

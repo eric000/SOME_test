@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>virtual dom</title>
+</head>
+<body>
+    <div id="app"></div>
+    <button id="btn-change">change</button>
+
+
+    <script src="https://cdn.bootcss.com/snabbdom/0.7.3/snabbdom.js"></script>
+    <script src="https://cdn.bootcss.com/snabbdom/0.7.3/snabbdom-class.js"></script>
+    <script src="https://cdn.bootcss.com/snabbdom/0.7.3/snabbdom-props.js"></script>
+    <script src="https://cdn.bootcss.com/snabbdom/0.7.3/snabbdom-style.js"></script>
+    <script src="https://cdn.bootcss.com/snabbdom/0.7.3/snabbdom-eventlisteners.min.js"></script>
+    <script src="https://cdn.bootcss.com/snabbdom/0.7.3/h.js"></script>
+    <script>
+        const snabbdom = window.snabbdom
+        // 初始化patch
+        const patch = snabbdom.init([
+            snabbdom_class,
+            snabbdom_props,
+            snabbdom_style,
+            snabbdom_eventlisteners
+        ]);
+        // 提取h函数
+        const h = snabbdom.h
+
+        // 准备数据
+        const data = [{
+            name: 'AA',
+            age: '18',
+            address:'beijing'
+        },
+        {
+            name: 'BB',
+            age: '8',
+            address:'jing'
+        },
+        {
+            name: 'CC',
+            age: '38',
+            address:'bei'
+        }]
+
+        data.unshift({
+            name: '姓名',
+            age: '年龄',
+            address:'地址'
+        })
+
+        // 渲染节点
+        const container = document.getElementById('app')
+        // 虚拟dom节点
+        let vnode
+
+        // 渲染函数
+        const render = (data) => {
+            let newNode = h('table', {}, data.map(item =>{
+                let tds = []
+                Object.keys(item).forEach(key => {
+                    tds.push(h('td', {}, item[key]))
+                });
+                return h('tr', {}, tds)
+            }))
+
+            if (vnode) {
+                // 替换dom
+                patch(vnode, newNode)
+            } else {
+                // 插入dom
+                patch(container, newNode)
+            }
+            // 更新虚拟dom
+            vnode = newNode
+        }
+
+        render(data)
+
+        // 修改data数据，观察dom的变化
+        const btnChange = document.getElementById('btn-change')
+        btnChange.addEventListener('click', function() {
+            data[1].age = ~~(Math.random() * 100) + ''
+            data[2].address = '广州'
+
+            render(data)
+        })
+    </script>
+</body>
+</html>
